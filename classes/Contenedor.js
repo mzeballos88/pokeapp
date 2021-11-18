@@ -46,6 +46,7 @@ class Contenedor{
             let data = await fs.promises.readFile('./files/producto.txt','utf-8')
             let events = JSON.parse(data);
             let event = events.find(evnt => evnt.id === id);
+            console.log(event);
             if(event){
                 return { status:"success", event:event}
             }

@@ -22,19 +22,9 @@ router.get('/:id',(req,res)=>{
     .then(
         result=>{
             res.send(result);
+            console.log(result);
         })
 })
-
-/* router.get('/:id',(req,res)=>{
-    let id = req.params.id;
-    id = parseInt(id);
-    contenedor.getById(id)
-    .then(
-        result=>{
-            res.send(result);
-        })
-}) */
-
 
 router.post('/',(req,res)=>{
     let cuerpo = req.body;
@@ -59,15 +49,6 @@ router.put('/:id',(req,res)=>{
     })
 })
 
-/* router.put('/:id',(req,res)=>{
-    let id = parseInt(req.params.id);
-    let body = req.body;
-    contenedor.update(id,body)
-    .then(
-        result=>{
-        res.send(result);
-    })
-}) */
 
 router.delete('/:id',(req,res)=>{
     let id = parseInt(req.params.id);
