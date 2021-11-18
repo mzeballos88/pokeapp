@@ -101,21 +101,30 @@ class Contenedor{
         }
     }
 
-   /*  async updateProducto(id,body){
+   async updateProducto(id,body){
         try{
             let data = await fs.promises.readFile('./files/producto.txt','utf-8');
             let productos = JSON.parse(data);
             if(!productos.some(prod=> prod.id === id))
-            
             return{ status: "error", message:"No hay productos con ese Id"}
             let result = productos.map( prod=>{
                 if(prod.id ===id){
-                    body = Object.assign(body)
+                    body = Object.assign({id:prod.id,...body})
+                    return body;
+                }else{
+                    return prod;
                 }
-            }
-                )
+            })
+            try{
+                await fs.promises.writeFile('./files/producto.txt',JSON.stringify(result,null,2));
+                return {status: "success", message:"Producto actualizado"}
+                }catch{
+                    return {status:"error", message:"Error al actualizar el usuario"}
+                }
+        }catch(err){
+            return {status:"error", message:"Intentalo de nuevo"}
         }
-    } */
+    }
 }
 
 module.exports = Contenedor;

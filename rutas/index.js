@@ -15,16 +15,25 @@ router.get('/',(req,res)=>{
     })
 })                         
 
-
 router.get('/:id',(req,res)=>{
     let id = req.params.id;
     id = parseInt(id);
     contenedor.getById(id)
     .then(
-        result => {
-        res.send(result);
-    })
+        result=>{
+            res.send(result);
+        })
 })
+
+/* router.get('/:id',(req,res)=>{
+    let id = req.params.id;
+    id = parseInt(id);
+    contenedor.getById(id)
+    .then(
+        result=>{
+            res.send(result);
+        })
+}) */
 
 
 router.post('/',(req,res)=>{
@@ -32,12 +41,25 @@ router.post('/',(req,res)=>{
     contenedor.save(cuerpo)
     .then(
         result=>{
-        res.send(result);
+            if(result.status ==="success"){
+               res.status(200).send(cuepo.id);
+            }else{
+               res.status(500).send("El pokemon ya existe");
+            }
     })
-
 })
 
 router.put('/:id',(req,res)=>{
+    let id = parseInt(req.params.id);
+    let body = req.body;
+    contenedor.updateProducto(id,body)
+    .then(
+        result=>{
+        res.send(result);
+    })
+})
+
+/* router.put('/:id',(req,res)=>{
     let id = parseInt(req.params.id);
     let body = req.body;
     contenedor.update(id,body)
@@ -45,7 +67,7 @@ router.put('/:id',(req,res)=>{
         result=>{
         res.send(result);
     })
-})
+}) */
 
 router.delete('/:id',(req,res)=>{
     let id = parseInt(req.params.id);
