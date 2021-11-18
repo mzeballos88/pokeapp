@@ -1,6 +1,7 @@
 const Contenedor = require('./classes/Contenedor');
 const contenedor = new Contenedor();
 const express = require('express');
+/* const multer = require('multer'); */
 
 const app = express();
 const archivoRutas = require('./rutas/index.js')
@@ -18,5 +19,18 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/productos', archivoRutas);
+
+/* const storage = multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,'public')
+    },
+    filename:function(req,file,cb){
+        cb(null,Date.now()+file.originalname)
+    }
+})
+
+const upload = multer({storage:storage}); */
+
+
 
 
