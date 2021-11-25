@@ -1,5 +1,5 @@
-const fs = require('fs');;
-const makeId = require('../utils');
+import fs from 'fs';
+import makeId from '../utils.js';
 
 class Contenedor{
     async save(event){
@@ -128,4 +128,4 @@ class Contenedor{
     }
 }
 
-module.exports = Contenedor;
+export default Contenedor;

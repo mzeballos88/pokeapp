@@ -1,7 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const Contenedor = require('../classes/Contenedor');
+import express from 'express';
+import Contenedor from '../classes/Contenedor.js';
+import upload from '../services/uploader.js';
+
 const contenedor = new Contenedor();
+const router = express.Router();
 
 router.get('/',(req,res)=>{
     contenedor.getAll()
@@ -26,8 +28,10 @@ router.get('/:id',(req,res)=>{
         })
 })
 
-router.post('/',(req,res)=>{
+router.post('/',upload.single('image'),(req,res)=>{
+    let file = req.file;
     let cuerpo = req.body;
+    pet.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/resources/images/'+file.filename;
     contenedor.save(cuerpo)
     .then(
         result=>{
@@ -60,4 +64,4 @@ router.delete('/:id',(req,res)=>{
     )
 })
 
-module.exports = router;
+export default router;
