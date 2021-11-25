@@ -31,7 +31,7 @@ router.get('/:id',(req,res)=>{
 router.post('/',upload.single('image'),(req,res)=>{
     let file = req.file;
     let cuerpo = req.body;
-    pet.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/resources/images/'+file.filename;
+    prod.thumbnail = req.protocol+"://"+req.hostname+":8080"+'/resources/images/'+file.filename;
     contenedor.save(cuerpo)
     .then(
         result=>{

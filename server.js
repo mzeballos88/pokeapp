@@ -16,6 +16,10 @@ const server = app.listen(PORT, ()=>{
     console.log("Servidor escuchando en: " +PORT)
 })
 
+app.engine('handlebars', engine())
+app.set('views', './views')
+app.set('view engine', 'handlebars')
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
@@ -31,6 +35,16 @@ app.get('/',(req,res)=>{
 app.use('/api/productos', archivoRutas);
 app.use('/resources',express.static('public'));
 
+app.get('/views/productos', (req,res)=>{
+    contenedor.getAll().then(result=>{
+        let info = result.event;
+        let preparedObject ={
+            products : info
+        }
+        res.render('products', preparedObject)
+
+    })
+})
 
 
 
